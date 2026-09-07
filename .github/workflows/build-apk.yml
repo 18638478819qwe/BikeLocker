@@ -5,7 +5,7 @@ on:
     branches: [ "main", "master" ]
   pull_request:
     branches: [ "main", "master" ]
-  workflow_dispatch: # 允许在 GitHub 网页上一键手动点击触发编译
+  workflow_dispatch:
 
 jobs:
   build:
@@ -20,15 +20,16 @@ jobs:
         with:
           java-version: '17'
           distribution: 'temurin'
-          cache: gradle
 
-      - name: 赋予 Gradle 执行权限
-        run: chmod +x gradlew || true
+      - name: 安装并配置官方 Gradle 8.6
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '8.6'
 
       - name: 编译生成 Debug 安装包 (免签名，手机直接安装)
-        run: ./gradlew assembleDebug --stacktrace
+        run: gradle assembleDebug --stacktrace
 
-      - name: 上传 APK 安装包供下载
+      - name: 上传 APK 安装包供直接下载
         uses: actions/upload-artifact@v4
         with:
           name: BikeLocker-App-Debug
