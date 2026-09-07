@@ -52,6 +52,15 @@ class RideMonitorService : Service(), MotionStateMachine.StateListener, SensorEv
         var isServiceRunning = false
             private set
 
+        var currentState: MotionStateMachine.State = MotionStateMachine.State.IDLE
+            private set
+        var currentSpeed: Float = 0f
+            private set
+        var currentSteps: Int = 0
+            private set
+        var currentBufferSec: Int = 0
+            private set
+
         fun startService(context: Context) {
             val intent = Intent(context, RideMonitorService::class.java)
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -114,6 +123,10 @@ class RideMonitorService : Service(), MotionStateMachine.StateListener, SensorEv
         super.onDestroy()
         Log.i(TAG, "RideMonitorService 正在停止并释放资源...")
         isServiceRunning = false
+        currentState = MotionStateMachine.State.IDLE
+        currentSpeed = 0f
+        currentSteps = 0
+        currentBufferSec = 0
 
         // 停止状态机并停止报警
         stateMachine.stop()
@@ -313,7 +326,13 @@ class RideMonitorService : Service(), MotionStateMachine.StateListener, SensorEv
     }
 
     private fun broadcastState(state: MotionStateMachine.State, speed: Float, steps: Int, bufferRemaining: Int) {
+        currentState = state
+        currentSpeed = speed
+        currentSteps = steps
+        currentBufferSec = bufferRemaining
+
         val intent = Intent(ACTION_STATE_BROADCAST).apply {
+            setPackage(packageName) // 核心：明确指定本包名，Android 14 规范要求！
             putExtra(EXTRA_STATE, state.name)
             putExtra(EXTRA_SPEED, speed)
             putExtra(EXTRA_STEPS, steps)

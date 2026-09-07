@@ -171,10 +171,21 @@ class MainActivity : AppCompatActivity() {
             registerReceiver(stateReceiver, filter)
         }
 
-        // 根据服务当前是否在运行，更新按钮显示
+        // 根据服务当前是否在运行，更新按钮与状态卡片显示
         if (RideMonitorService.isServiceRunning) {
             btnToggleMonitor.text = getString(R.string.btn_stop_monitor)
             btnToggleMonitor.setBackgroundResource(R.drawable.bg_button_stop)
+            val state = if (RideMonitorService.currentState == MotionStateMachine.State.IDLE) {
+                MotionStateMachine.State.RIDING
+            } else {
+                RideMonitorService.currentState
+            }
+            updateUiForState(
+                state,
+                RideMonitorService.currentSpeed,
+                RideMonitorService.currentSteps,
+                RideMonitorService.currentBufferSec
+            )
         } else {
             btnToggleMonitor.text = getString(R.string.btn_start_monitor)
             btnToggleMonitor.setBackgroundResource(R.drawable.bg_button_start)
@@ -355,6 +366,7 @@ class MainActivity : AppCompatActivity() {
         RideMonitorService.startService(this)
         btnToggleMonitor.text = getString(R.string.btn_stop_monitor)
         btnToggleMonitor.setBackgroundResource(R.drawable.bg_button_stop)
+        updateUiForState(MotionStateMachine.State.RIDING, 0f, 0, 0)
         Toast.makeText(this, "🚀 守护已开启！放入口袋即可，停下步行超30步将自动强震动提醒", Toast.LENGTH_LONG).show()
     }
 
