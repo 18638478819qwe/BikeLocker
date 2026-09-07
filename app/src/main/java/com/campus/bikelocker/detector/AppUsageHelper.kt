@@ -19,11 +19,12 @@ object AppUsageHelper {
 
     private const val TAG = "AppUsageHelper"
 
-    // 滴滴相关应用包名集合（包含主应用、独立青桔单车、顺风车等）
+    // 滴滴相关应用包名集合（涵盖滴滴主应用、青桔单车、定制包）
     private val DIDI_PACKAGES = setOf(
-        "com.sdu.didi.psnger",       // 滴滴出行官方主应用（涵盖青桔单车扫码）
+        "com.sdu.didi.psnger",       // 「滴滴」官方主应用（青桔单车主入口）
         "com.didi.echo",             // 青桔单车独立应用
-        "com.didipinche.booking"     // 滴滴出行部分定制渠道包
+        "com.didipinche.booking",     // 滴滴渠道包
+        "com.didiglobal.passenger"   // 滴滴全球定制版
     )
 
     /**

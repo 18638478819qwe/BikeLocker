@@ -13,7 +13,7 @@
     <string name="btn_start_monitor">开启骑行防遗忘监测</string>
     <string name="btn_stop_monitor">我已锁车 / 结束监测</string>
     <string name="btn_test_alarm">📢 模拟测试报警（体验强震动与弹窗）</string>
-    <string name="btn_open_didi">🚀 打开滴滴出行还车</string>
+    <string name="btn_open_didi">🚀 打开滴滴还车</string>
 
     <!-- 通知文本 -->
     <string name="notification_channel_name">单车骑行状态监测</string>
@@ -31,7 +31,7 @@
 
     <!-- 滴滴前台打开自动感应功能文案 -->
     <string name="auto_detect_title">🤖 滴滴打开自动感应</string>
-    <string name="auto_detect_desc">无需手动点开启，只要手机打开「滴滴出行」，自动进入锁车守护模式；息屏深度休眠 0 耗电。</string>
+    <string name="auto_detect_desc">无需手动点开启，只要手机打开「滴滴」，自动进入锁车守护模式；息屏深度休眠 0 耗电。</string>
     <string name="auto_detect_permission_title">需要开启「使用情况访问权限」</string>
     <string name="auto_detect_permission_desc">为了在您打开滴滴 App 时全自动激活锁车助手，Android 系统要求开启「有权查看使用情况的应用」授权。请在稍后弹出的设置列表中找到【锁车了吗】并开启允许。</string>
 

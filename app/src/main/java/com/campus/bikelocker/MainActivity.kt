@@ -24,6 +24,7 @@ import com.campus.bikelocker.detector.AppUsageHelper
 import com.campus.bikelocker.detector.MotionStateMachine
 import com.campus.bikelocker.service.DidiAutoDetectService
 import com.campus.bikelocker.service.RideMonitorService
+import com.campus.bikelocker.util.AppLauncher
 
 /**
  * 📱 主界面 Activity (MainActivity)
@@ -188,7 +189,7 @@ class MainActivity : AppCompatActivity() {
                     showUsageAccessPermissionDialog()
                 } else {
                     DidiAutoDetectService.startService(this)
-                    Toast.makeText(this, "✨ 滴滴自动感应已启动！打开滴滴出行将自动开始守护", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "✨ 滴滴自动感应已启动！打开滴滴将自动开始守护", Toast.LENGTH_SHORT).show()
                 }
             } else {
                 if (DidiAutoDetectService.isServiceRunning) {
@@ -296,18 +297,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun openDidiOrPrompt() {
-        val pm = packageManager
-        try {
-            val intent = pm.getLaunchIntentForPackage("com.sdu.didi.psnger")
-            if (intent != null) {
-                startActivity(intent)
-            } else {
-                val uriIntent = Intent(Intent.ACTION_VIEW, Uri.parse("didipasnger://"))
-                startActivity(uriIntent)
-            }
-        } catch (e: Exception) {
-            Toast.makeText(this, "未找到滴滴出行 App，请手动打开滴滴/微信小程序", Toast.LENGTH_SHORT).show()
-        }
+        AppLauncher.openDidi(this)
     }
 
     private fun openAppSettingDetails() {

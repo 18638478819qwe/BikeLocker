@@ -2,13 +2,13 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- ==================== 权限声明区（附通俗注释） ==================== -->
+    <!-- ==================== 权限与应用可见性声明区 ==================== -->
 
     <!-- 1. GPS 精确定位与粗略定位权限：用于计算实时移动速度，判断是否在骑自行车（>8km/h） -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
-    <!-- 2. 后台定位权限：息屏或切换到滴滴/微信小程序后，依然能获取速度 -->
+    <!-- 2. 后台定位权限：息屏或切换到滴滴后，依然能获取速度 -->
     <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
 
     <!-- 3. 硬件计步与身体动作传感器：直接调用手机协处理器，识别停下车后的迈步动作（零耗电） -->
@@ -30,10 +30,35 @@
     <!-- 7. 请求忽略电池优化：引导小米 HyperOS/MIUI 系统不限制后台活动 -->
     <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
 
-    <!-- 8. 使用情况访问权限：用于在后台感知用户打开滴滴出行 App 并自动唤醒锁车助手 -->
+    <!-- 8. 使用情况访问权限：用于在后台感知用户打开滴滴 App 并自动唤醒锁车助手 -->
     <uses-permission
         android:name="android.permission.PACKAGE_USAGE_STATS"
         tools:ignore="ProtectedPermissions" />
+
+    <!-- 9. 查询设备所有应用权限（Android 11+ 查询滴滴 App） -->
+    <uses-permission
+        android:name="android.permission.QUERY_ALL_PACKAGES"
+        tools:ignore="QueryAllPackagesPermission" />
+
+    <!-- 10. Android 11+ 软件包可见性声明：显式声明滴滴及青桔相关包名与 Scheme -->
+    <queries>
+        <!-- 滴滴（原滴滴出行，改名后包名仍为 com.sdu.didi.psnger） -->
+        <package android:name="com.sdu.didi.psnger" />
+        <!-- 滴滴青桔单车独立版 / 滴滴单车 -->
+        <package android:name="com.didi.echo" />
+        <!-- 滴滴其他定制渠道包 -->
+        <package android:name="com.didipinche.booking" />
+        <package android:name="com.didiglobal.passenger" />
+        <!-- 滴滴官方唤起 Scheme -->
+        <intent>
+            <action android:name="android.intent.action.VIEW" />
+            <data android:scheme="didipasnger" />
+        </intent>
+        <intent>
+            <action android:name="android.intent.action.VIEW" />
+            <data android:scheme="didi" />
+        </intent>
+    </queries>
 
     <application
         android:allowBackup="true"
