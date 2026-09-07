@@ -1,0 +1,11 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <style name="Theme.BikeLocker" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- 主题主色调 -->
+        <item name="colorPrimary">@color/primary_qingju</item>
+        <item name="colorPrimaryVariant">@color/primary_qingju_dark</item>
+        <item name="colorOnPrimary">@android:color/white</item>
+        <!-- 状态栏颜色 -->
+        <item name="android:statusBarColor">@color/bg_main</item>
+        <item name="android:windowLightStatusBar">true</item>
+    </style>
+</resources>

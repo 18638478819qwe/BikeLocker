@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 青桔绿色主题色 -->
+    <color name="primary_qingju">#00C48C</color>
+    <color name="primary_qingju_dark">#009A6E</color>
+    <color name="primary_qingju_light">#E6FAF4</color>
+    
+    <!-- 状态指示颜色 -->
+    <color name="status_green">#00C48C</color>
+    <color name="status_orange">#FF9800</color>
+    <color name="status_red">#FF4D4F</color>
+    <color name="status_gray">#8C8C8C</color>
+
+    <!-- 背景与文字色 -->
+    <color name="bg_main">#F7F8FA</color>
+    <color name="card_bg">#FFFFFF</color>
+    <color name="text_title">#1F2329</color>
+    <color name="text_sub">#646A73</color>
+    <color name="border_color">#E5E6EB</color>
+</resources>

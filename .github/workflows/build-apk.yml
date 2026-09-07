@@ -1,0 +1,36 @@
+name: 自动编译生成 BikeLocker APK
+
+on:
+  push:
+    branches: [ "main", "master" ]
+  pull_request:
+    branches: [ "main", "master" ]
+  workflow_dispatch: # 允许在 GitHub 网页上一键手动点击触发编译
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 检出仓库代码
+        uses: actions/checkout@v4
+
+      - name: 配置 JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: gradle
+
+      - name: 赋予 Gradle 执行权限
+        run: chmod +x gradlew || true
+
+      - name: 编译生成 Debug 安装包 (免签名，手机直接安装)
+        run: ./gradlew assembleDebug --stacktrace
+
+      - name: 上传 APK 安装包供下载
+        uses: actions/upload-artifact@v4
+        with:
+          name: BikeLocker-App-Debug
+          path: app/build/outputs/apk/debug/*.apk
+          retention-days: 7

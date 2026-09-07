@@ -1,0 +1,23 @@
+# Gradle 缓存与构建输出
+*.iml
+.gradle
+/local.properties
+/.idea/caches
+/.idea/libraries
+/.idea/modules.xml
+/.idea/workspace.xml
+/.idea/navEditor.xml
+/.idea/assetWizardSettings.xml
+.DS_Store
+/build
+/captures
+.externalNativeBuild
+.cxx
+local.properties
+
+# 模块构建目录
+app/build/
+
+# 本地临时自动化部署脚本 (防敏感 Token 上传)
+github_deploy.py
+test_state_machine.py
