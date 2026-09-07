@@ -26,6 +26,7 @@
     <!-- 6. 强力震动与唤醒屏幕：到达目的地时触发连续强震动，提醒锁车 -->
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.DISABLE_KEYGUARD" />
 
     <!-- 7. 请求忽略电池优化：引导小米 HyperOS/MIUI 系统不限制后台活动 -->
     <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
@@ -70,12 +71,14 @@
         android:theme="@style/Theme.BikeLocker"
         tools:targetApi="31">
 
-        <!-- 主界面 Activity -->
+        <!-- 主界面 Activity（允许锁屏直接唤醒展示全屏警报弹窗） -->
         <activity
             android:name=".MainActivity"
             android:exported="true"
             android:launchMode="singleTop"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:showWhenLocked="true"
+            android:turnScreenOn="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
